@@ -43,16 +43,12 @@ const userSchema = new mongoose.Schema(
 
 // Password Hashing Middleware
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   if (!this.isModified("password")) {
-    return next();
+    return;
   }
-
   const salt = await bcrypt.genSalt(Number(process.env.BCRYPT_SALT_ROUNDS));
-
   this.password = await bcrypt.hash(this.password, salt);
-
-  next();
 });
 
 // Password Compare Method
