@@ -122,7 +122,14 @@ BCRYPT_SALT_ROUNDS=12
 CLIENT_URL=http://localhost:5173
 ```
 
-### 4. Run the Dev Server
+### 4. Create the Initial Admin User
+If you are setting up the system for the first time, you will need an Admin account to manage resources. Run the interactive CLI script:
+```bash
+npm run create-admin
+```
+Follow the prompts to enter the Admin Name, Email, and Password. The script will securely hash the password and register the account in your MongoDB database.
+
+### 5. Run the Dev Server
 To start the backend using `nodemon` (auto-reloads on file edits):
 ```bash
 npm run dev
