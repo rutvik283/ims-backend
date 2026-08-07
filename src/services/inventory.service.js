@@ -4,6 +4,7 @@ const ApiError = require("../utils/ApiError");
 const { HTTP_STATUS, MESSAGES, TRANSACTION_TYPE } = require("../constants");
 const validateObjectId = require("../utils/validateObjectId");
 const { paginate } = require("../utils/paginate");
+const appEmitter = require("../utils/eventEmitter");
 
 /**
  * Adjust Stock (Increase or Decrease)
@@ -48,6 +49,8 @@ const adjustStock = async ({ product: productId, type, quantity, performedBy }) 
     newQuantity,
     performedBy,
   });
+
+  appEmitter.emit("inventoryUpdated");
 
   return {
     product,

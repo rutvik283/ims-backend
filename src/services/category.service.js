@@ -5,6 +5,7 @@ const ApiError = require("../utils/ApiError");
 const { HTTP_STATUS, MESSAGES } = require("../constants");
 const validateObjectId = require("../utils/validateObjectId");
 const { paginate } = require("../utils/paginate");
+const appEmitter = require("../utils/eventEmitter");
 
 /**
  * Create Category
@@ -24,6 +25,8 @@ const createCategory = async ({ name, description, createdBy }) => {
     description,
     createdBy,
   });
+
+  appEmitter.emit("inventoryUpdated");
 
   return category;
 };
@@ -114,6 +117,8 @@ const deleteCategory = async (categoryId) => {
   }
 
   await category.deleteOne();
+
+  appEmitter.emit("inventoryUpdated");
 
   return null;
 };

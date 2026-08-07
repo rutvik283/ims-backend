@@ -4,6 +4,7 @@ const ApiError = require("../utils/ApiError");
 const { HTTP_STATUS, MESSAGES } = require("../constants");
 const validateObjectId = require("../utils/validateObjectId");
 const { paginate } = require("../utils/paginate");
+const appEmitter = require("../utils/eventEmitter");
 
 /**
  * Create Product
@@ -35,6 +36,8 @@ const createProduct = async (data) => {
     supplierName: supplierName.trim(),
     createdBy,
   });
+
+  appEmitter.emit("inventoryUpdated");
 
   return product;
 };
@@ -164,6 +167,8 @@ const updateProduct = async (productId, payload) => {
   // .save() triggers the pre-save hook which auto-sets status
   await product.save();
 
+  appEmitter.emit("inventoryUpdated");
+
   return product;
 };
 
@@ -180,6 +185,8 @@ const deleteProduct = async (productId) => {
   }
 
   await product.deleteOne();
+
+  appEmitter.emit("inventoryUpdated");
 
   return null;
 };
