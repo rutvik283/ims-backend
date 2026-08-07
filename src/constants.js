@@ -43,6 +43,10 @@ const TRANSACTION_TYPE = {
  * Common Response Messages
  */
 const MESSAGES = {
+  COMMON: {
+    INVALID_ID: "Invalid resource id.",
+  },
+
   AUTH: {
     REGISTER_SUCCESS: "User registered successfully.",
     LOGIN_SUCCESS: "Login successful.",
@@ -59,10 +63,13 @@ const MESSAGES = {
   },
 
   CATEGORY: {
+    ALREADY_EXISTS: "Category already exists.",
+    NOT_FOUND: "Category not found.",
     CREATED: "Category created successfully.",
     UPDATED: "Category updated successfully.",
     DELETED: "Category deleted successfully.",
-    NOT_FOUND: "Category not found.",
+    FETCHED: "Categories fetched successfully.",
+    DETAILS_FETCHED: "Category fetched successfully.",
   },
 
   VALIDATION: {
@@ -90,6 +97,14 @@ const COOKIE_OPTIONS = {
   },
 };
 
+const VALIDATION = {
+  CATEGORY: {
+    NAME_MIN_LENGTH: 2,
+    NAME_MAX_LENGTH: 100,
+    DESCRIPTION_MAX_LENGTH: 500,
+  },
+};
+
 module.exports = {
   HTTP_STATUS,
   ROLES,
@@ -97,4 +112,5 @@ module.exports = {
   TRANSACTION_TYPE,
   MESSAGES,
   COOKIE_OPTIONS,
+  VALIDATION,
 };

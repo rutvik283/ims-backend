@@ -49,8 +49,20 @@ const logout = asyncHandler(async (req, res) => {
   });
 });
 
+const getMyProfile = asyncHandler(async (req, res) => {
+  const user = await authService.getUserProfile(req.user.id);
+
+  return sendSuccess(res, {
+    message: MESSAGES.AUTH.PROFILE_SUCCESS,
+    data: {
+      user: user,
+    },
+  });
+});
+
 module.exports = {
   register,
   login,
+  getMyProfile,
   logout,
 };

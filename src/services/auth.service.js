@@ -74,7 +74,18 @@ const loginUser = async ({ email, password }) => {
   };
 };
 
+const getUserProfile = async (userId) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new ApiError(HTTP_STATUS.NOT_FOUND, MESSAGES.AUTH.USER_NOT_FOUND);
+  }
+
+  return sanitizeUser(user);
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  getUserProfile,
 };

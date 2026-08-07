@@ -64,7 +64,7 @@ const productSchema = new mongoose.Schema(
   },
 );
 
-productSchema.pre("save", function (next) {
+productSchema.pre("save", function () {
   if (this.quantity === 0) {
     this.status = "OUT_OF_STOCK";
   } else if (this.quantity <= 10) {
@@ -72,8 +72,6 @@ productSchema.pre("save", function (next) {
   } else {
     this.status = "IN_STOCK";
   }
-
-  next();
 });
 
 productSchema.index({
