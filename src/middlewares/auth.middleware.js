@@ -14,7 +14,7 @@ const authenticate = asyncHandler(async (req, res, next) => {
   const decoded = verifyAccessToken(token);
 
   const user = await User.findById(decoded.userId);
-  if (!user) {
+  if (!user || !user.isActive) {
     throw new ApiError(HTTP_STATUS.UNAUTHORIZED, "User no longer exists.");
   }
 

@@ -48,6 +48,9 @@ const loginUser = async ({ email, password }) => {
       MESSAGES.AUTH.INVALID_CREDENTIALS,
     );
   }
+  if (!user.isActive) {
+    throw new ApiError(HTTP_STATUS.UNAUTHORIZED, MESSAGES.AUTH.INACTIVE_USER);
+  }
 
   const isPasswordValid = await user.comparePassword(password);
 

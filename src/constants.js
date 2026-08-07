@@ -48,10 +48,13 @@ const MESSAGES = {
   },
 
   AUTH: {
-    REGISTER_SUCCESS: "User registered successfully.",
+    REGISTER_SUCCESS:
+      "Account created successfully. please ask admin to activate your account.",
     LOGIN_SUCCESS: "Login successful.",
     LOGOUT_SUCCESS: "Logout successful.",
     INVALID_CREDENTIALS: "Invalid email or password.",
+    INACTIVE_USER:
+      "User account is inactive. Please contact the administrator.",
     USER_EXISTS: "User already exists.",
   },
 
@@ -100,7 +103,8 @@ const MESSAGES = {
   INVENTORY: {
     ADJUSTED: "Stock adjusted successfully.",
     FETCHED: "Transactions fetched successfully.",
-    INSUFFICIENT_STOCK: "Insufficient stock. Cannot decrease beyond available quantity.",
+    INSUFFICIENT_STOCK:
+      "Insufficient stock. Cannot decrease beyond available quantity.",
   },
 };
 
