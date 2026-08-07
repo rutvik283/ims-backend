@@ -13,6 +13,7 @@ const authRoutes = require("./routes/auth.routes");
 const categoryRoutes = require("./routes/category.routes");
 const productRoutes = require("./routes/product.routes");
 const inventoryRoutes = require("./routes/inventory.routes");
+const userRoutes = require("./routes/user.routes");
 const commonRoutes = require("./routes/common.routes");
 
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/categories", categoryRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/inventory", inventoryRoutes);
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/options", commonRoutes);
 
 app.use(notFound);

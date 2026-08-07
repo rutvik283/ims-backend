@@ -80,6 +80,15 @@ const MESSAGES = {
     DETAILS_FETCHED: "Category fetched successfully.",
   },
 
+  USER: {
+    FETCHED: "Users fetched successfully.",
+    UPDATED: "User updated successfully.",
+    DELETED: "User deleted successfully.",
+    NOT_FOUND: "User not found.",
+    EMAIL_EXISTS: "User with this email already exists.",
+    CANNOT_DELETE_SELF: "You cannot delete your own admin account.",
+  },
+
   VALIDATION: {
     FAILED: "Validation failed.",
   },
