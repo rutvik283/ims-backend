@@ -87,6 +87,12 @@ const MESSAGES = {
   SERVER: {
     ERROR: "Something went wrong. Please try again later.",
   },
+
+  INVENTORY: {
+    ADJUSTED: "Stock adjusted successfully.",
+    FETCHED: "Transactions fetched successfully.",
+    INSUFFICIENT_STOCK: "Insufficient stock. Cannot decrease beyond available quantity.",
+  },
 };
 
 const COOKIE_OPTIONS = {
