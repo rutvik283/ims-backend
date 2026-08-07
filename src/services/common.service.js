@@ -1,4 +1,5 @@
 const Category = require("../models/category.model");
+const Product = require("../models/product.model");
 const { STOCK_STATUS } = require("../constants");
 
 /**
@@ -26,6 +27,18 @@ const optionFetchers = {
         .split("_")
         .map((word) => word.charAt(0) + word.slice(1).toLowerCase())
         .join(" "),
+    }));
+  },
+
+  products: async () => {
+    const products = await Product.find()
+      .select("_id name sku")
+      .sort({ name: 1 })
+      .lean();
+
+    return products.map((prod) => ({
+      value: prod._id,
+      label: `${prod.name} (${prod.sku})`,
     }));
   },
 };
