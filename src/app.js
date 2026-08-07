@@ -11,6 +11,8 @@ const corsMiddleware = require("./config/cors");
 // routes
 const authRoutes = require("./routes/auth.routes");
 const categoryRoutes = require("./routes/category.routes");
+const productRoutes = require("./routes/product.routes");
+const commonRoutes = require("./routes/common.routes");
 
 const app = express();
 
@@ -37,6 +39,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/categories", categoryRoutes);
+app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/options", commonRoutes);
 
 app.use(notFound);
 

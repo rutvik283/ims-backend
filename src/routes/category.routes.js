@@ -33,12 +33,7 @@ router.post(
   createCategory,
 );
 
-router.get(
-  "/",
-
-  authenticate,
-  getCategories,
-);
+router.get("/", authenticate, getCategories);
 
 router.get("/:id", authenticate, getCategoryById);
 
@@ -49,6 +44,7 @@ router.patch(
   validate(updateCategorySchema),
   updateCategory,
 );
+
 router.delete("/:id", authenticate, authorize(ROLES.ADMIN), deleteCategory);
 
 module.exports = router;

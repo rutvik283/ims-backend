@@ -57,9 +57,17 @@ const MESSAGES = {
 
   PRODUCT: {
     CREATED: "Product created successfully.",
+    FETCHED: "Products fetched successfully.",
+    DETAILS_FETCHED: "Product fetched successfully.",
     UPDATED: "Product updated successfully.",
     DELETED: "Product deleted successfully.",
     NOT_FOUND: "Product not found.",
+    ALREADY_EXISTS: "Product with this SKU already exists.",
+  },
+
+  OPTIONS: {
+    FETCHED: "Options fetched successfully.",
+    INVALID_FIELDS: "Please provide valid fields query parameter.",
   },
 
   CATEGORY: {
@@ -102,6 +110,16 @@ const VALIDATION = {
     NAME_MIN_LENGTH: 2,
     NAME_MAX_LENGTH: 100,
     DESCRIPTION_MAX_LENGTH: 500,
+  },
+
+  PRODUCT: {
+    NAME_MIN_LENGTH: 2,
+    NAME_MAX_LENGTH: 200,
+    SKU_MIN_LENGTH: 2,
+    SKU_MAX_LENGTH: 50,
+    DESCRIPTION_MAX_LENGTH: 1000,
+    SUPPLIER_NAME_MIN_LENGTH: 2,
+    SUPPLIER_NAME_MAX_LENGTH: 200,
   },
 };
 
