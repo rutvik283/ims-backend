@@ -1,6 +1,9 @@
 /**
  * HTTP Status Codes
  */
+
+const isProduction = process.env.NODE_ENV === "production";
+
 const HTTP_STATUS = {
   OK: 200,
   CREATED: 201,
@@ -112,14 +115,14 @@ const COOKIE_OPTIONS = {
   ACCESS_TOKEN: {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 15 * 60 * 1000,
   },
 
   REFRESH_TOKEN: {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: isProduction ? "none" : "lax",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   },
 };
