@@ -60,9 +60,32 @@ const getMyProfile = asyncHandler(async (req, res) => {
   });
 });
 
+/**
+ * Refresh Access Token
+ * POST /api/v1/auth/refresh
+ */
+const refresh = asyncHandler(async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  const result = await authService.refreshAccessToken(refreshToken);
+
+  setAuthCookies(res, {
+    accessToken: result.accessToken,
+    refreshToken: result.refreshToken,
+  });
+
+  return sendSuccess(res, {
+    message: "Token refreshed successfully.",
+    data: {
+      user: result.user,
+    },
+  });
+});
+
 module.exports = {
   register,
   login,
   getMyProfile,
   logout,
+  refresh,
 };

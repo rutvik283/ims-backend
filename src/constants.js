@@ -2,7 +2,11 @@
  * HTTP Status Codes
  */
 
+const { parseExpiryToMs } = require("./utils/common");
+
 const isProduction = process.env.NODE_ENV === "production";
+const ACCESS_TOKEN_MAX_AGE = parseExpiryToMs(process.env.JWT_ACTION_EXPIRE);
+const REFRESH_TOKEN_MAX_AGE = parseExpiryToMs(process.env.JWT_REFRESH_EXPIRE);
 
 const HTTP_STATUS = {
   OK: 200,
@@ -114,16 +118,16 @@ const MESSAGES = {
 const COOKIE_OPTIONS = {
   ACCESS_TOKEN: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProduction,
     sameSite: isProduction ? "none" : "lax",
-    maxAge: 15 * 60 * 1000,
+    maxAge: ACCESS_TOKEN_MAX_AGE,
   },
 
   REFRESH_TOKEN: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProduction,
     sameSite: isProduction ? "none" : "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    maxAge: REFRESH_TOKEN_MAX_AGE,
   },
 };
 

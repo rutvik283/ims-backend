@@ -1,6 +1,6 @@
 const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
-const { generateAccessToken, generateRefreshToken } = require("../utils/jwt");
+const { generateAccessToken, generateRefreshToken, verifyRefreshToken } = require("../utils/jwt");
 const { HTTP_STATUS, MESSAGES } = require("../constants");
 
 const sanitizeUser = (user) => {
@@ -87,8 +87,49 @@ const getUserProfile = async (userId) => {
   return sanitizeUser(user);
 };
 
+const refreshAccessToken = async (refreshToken) => {
+  if (!refreshToken) {
+    throw new ApiError(HTTP_STATUS.UNAUTHORIZED, "Refresh token required.");
+  }
+
+  try {
+    const decoded = verifyRefreshToken(refreshToken);
+    const user = await User.findById(decoded.userId);
+
+    if (!user) {
+      throw new ApiError(HTTP_STATUS.UNAUTHORIZED, "User no longer exists.");
+    }
+
+    if (!user.isActive) {
+      throw new ApiError(HTTP_STATUS.UNAUTHORIZED, "User account is suspended.");
+    }
+
+    const accessToken = generateAccessToken({
+      userId: user._id,
+      role: user.role,
+    });
+
+    const newRefreshToken = generateRefreshToken({
+      userId: user._id,
+      role: user.role,
+    });
+
+    return {
+      accessToken,
+      refreshToken: newRefreshToken,
+      user: sanitizeUser(user),
+    };
+  } catch (error) {
+    throw new ApiError(
+      HTTP_STATUS.UNAUTHORIZED,
+      "Invalid or expired refresh token.",
+    );
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getUserProfile,
+  refreshAccessToken,
 };
