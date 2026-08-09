@@ -1,6 +1,4 @@
 const xss = require("xss");
-const mongoSanitize = require("express-mongo-sanitize");
-
 /**
  * Sanitize request body, params and query
  * against XSS attacks

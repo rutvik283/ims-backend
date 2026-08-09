@@ -16,12 +16,14 @@ const inventoryRoutes = require("./routes/inventory.routes");
 const userRoutes = require("./routes/user.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const commonRoutes = require("./routes/common.routes");
+const { globalRateLimiter } = require("./middlewares/rate-limit-middleware");
 
 const app = express();
 
 app.use(helmet());
 app.use(corsMiddleware);
 
+app.use(globalRateLimiter);
 app.use(express.json());
 app.use(cookieParser());
 
